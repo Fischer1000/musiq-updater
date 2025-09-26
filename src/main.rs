@@ -1,4 +1,4 @@
-//! A tool for updating and running "musiq"
+//! A tool for updating and running `musiq`
 
 #[cfg(target_os = "windows")]
 compile_error!("This program was not designed to be run on Windows");
