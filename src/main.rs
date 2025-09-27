@@ -28,14 +28,16 @@ macro_rules! return_unless {
 }
 
 fn main() {
+    let mut args = std::env::args().skip(1);
+
     let musiq_source_path = PathBuf::from(or_return!(
-        std::env::var("MUSIQ_SOURCE_PATH").ok(),
-        println!("MUSIQ_SOURCE_PATH environment variable is required")
+        std::env::var("MUSIQ_SOURCE_PATH").ok().or_else(|| args.next()),
+        println!("MUSIQ_SOURCE_PATH environment variable or a command-line argument is required")
     ));
 
     let musiq_path = PathBuf::from(or_return!(
-        std::env::var("MUSIQ_PATH").ok(),
-        println!("MUSIQ_PATH environment variable is required")
+        std::env::var("MUSIQ_PATH").ok().or_else(|| args.next()),
+        println!("MUSIQ_PATH environment variable or a command-line argument is required")
     ));
 
     // git fetch --all
