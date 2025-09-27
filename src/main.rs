@@ -88,12 +88,12 @@ fn main() {
         println!("\"git reset\" exited unsuccessfully")
     );
 
-    // cargo build --release
+    // cargo build -rq
     return_unless!(
         or_return!(
             or_return!(
                 std::process::Command::new("cargo")
-                    .args(["build", "--release"])
+                    .args(["build", "-rq"])
                     .envs([("", ""); 0]) // TODO
                     .current_dir(&musiq_source_path)
                     .spawn()
