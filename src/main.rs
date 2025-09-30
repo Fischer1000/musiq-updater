@@ -57,20 +57,17 @@ fn main() {
     );
 
     // git branch origin/master
-    return_unless!(
+    let _ = or_return!(
         or_return!(
-            or_return!(
-                std::process::Command::new("git")
-                    .args(["branch", "origin/master"])
-                    .current_dir(&musiq_source_path)
-                    .spawn()
-                    .ok(),
-                println!("\"git branch\" cannot be ran")
-            ).wait().ok(),
+            std::process::Command::new("git")
+                .args(["branch", "origin/master"])
+                .current_dir(&musiq_source_path)
+                .spawn()
+                .ok(),
             println!("\"git branch\" cannot be ran")
-        ).success(),
-        println!("\"git branch\" exited unsuccessfully")
-    );
+        ).wait().ok(),
+        println!("\"git branch\" cannot be ran")
+    ).success();
 
     // git reset --hard origin/master
     return_unless!(
