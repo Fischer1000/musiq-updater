@@ -94,7 +94,7 @@ fn main() {
             or_return!(
                 std::process::Command::new("cargo")
                     .args(["build", "-rq"])
-                    .envs([("", ""); 0]) // TODO
+                    //.envs([("", ""); 0]) // TODO
                     .current_dir(&musiq_source_path)
                     .spawn()
                     .ok(),
@@ -120,8 +120,8 @@ fn main() {
             or_return!(
                 std::process::Command::new("tmux")
                     .args(["new", "-ds", "musiq", "./musiq", "0.0.0.0:7878"])
-                    .envs([("", ""); 0]) // TODO
-                    .current_dir(&musiq_source_path)
+                    //.envs([("", ""); 0]) // TODO
+                    .current_dir(&musiq_path)
                     .spawn()
                     .ok(),
                 println!("\"tmux new\" cannot be ran")
